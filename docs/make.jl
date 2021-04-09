@@ -26,4 +26,6 @@ makedocs(;
     checkdocs=:exports,
 )
 
-deploydocs(; repo="github.com/devmotion/AbstractGPsMakie.jl", push_preview=true)
+deploydocs(;
+    repo="github.com/devmotion/AbstractGPsMakie.jl", push_preview=true, devbranch="main"
+)
