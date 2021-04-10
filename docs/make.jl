@@ -14,11 +14,11 @@ DocMeta.setdocmeta!(
 makedocs(;
     modules=[AbstractGPsMakie],
     authors="David Widmann",
-    repo="https://github.com/devmotion/AbstractGPsMakie.jl/blob/{commit}{path}#{line}",
+    repo="https://github.com/JuliaGaussianProcesses/AbstractGPsMakie.jl/blob/{commit}{path}#{line}",
     sitename="AbstractGPsMakie.jl",
     format=Documenter.HTML(;
         prettyurls=get(ENV, "CI", "false") == "true",
-        canonical="https://devmotion.github.io/AbstractGPsMakie.jl",
+        canonical="https://juliagaussianprocesses.github.io/AbstractGPsMakie.jl",
         assets=String[],
     ),
     pages=["Home" => "index.md"],
@@ -27,5 +27,5 @@ makedocs(;
 )
 
 deploydocs(;
-    repo="github.com/devmotion/AbstractGPsMakie.jl", push_preview=true, devbranch="main"
+    repo="github.com/JuliaGaussianProcesses/AbstractGPsMakie.jl", push_preview=true, devbranch="main"
 )
