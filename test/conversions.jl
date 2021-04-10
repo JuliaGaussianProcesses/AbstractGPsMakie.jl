@@ -19,7 +19,8 @@
     # Fallback for `Band`
     lower = mu .- 3 .* sqrt.(var)
     upper = mu .+ 3 .* sqrt.(var)
-    @test convert_arguments(Band, z, f) == (map(Point2f0, z, lower), map(Point2f0, z, upper))
+    @test convert_arguments(Band, z, f) ==
+          (map(Point2f0, z, lower), map(Point2f0, z, upper))
 
     # Fallback for `AbstractGP` and `FiniteGP`
     for P in (Lines, LineSegments, Scatter, Band, SymBand, GPSample)
