@@ -14,9 +14,9 @@ function AbstractPlotting.convert_arguments(
     return (x, gp)
 end
 
-# Fallback for `lines`, `scatter` etc.: plot mean of GP
+# Default fallback: plot mean of GP
 function AbstractPlotting.convert_arguments(
-    P::AbstractPlotting.PointBased, x::AbstractVector, gp::FiniteGP
+    P::AbstractPlotting.PlotFunc, x::AbstractVector, gp::FiniteGP
 )
     return convert_arguments(P, x, mean(gp))
 end
