@@ -1,2 +1,10 @@
 [deps]
+AbstractGPs = "99985d1d-32ba-4be9-9821-2ec096f28918"
+AbstractPlotting = "537997a7-5e4e-5d89-9595-2241ea00577e"
+Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[compat]
+AbstractGPs = "0.3"
+AbstractPlotting = "0.16"
+julia = "1.3"

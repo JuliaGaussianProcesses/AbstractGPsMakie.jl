@@ -56,4 +56,4 @@ function AbstractPlotting.plot!(plot::SymBand)
     return plot
 end
 
-AbstractPlotting.convert_arguments(::Type{<:SymBand}, x, y, Δy) = (Point2f0.(x, y), Δy)
+AbstractPlotting.convert_arguments(::Type{<:SymBand}, x, y, Δy) = (map(Point2f0, x, y), Δy)
