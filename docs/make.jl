@@ -21,7 +21,7 @@ makedocs(;
         canonical="https://juliagaussianprocesses.github.io/AbstractGPsMakie.jl",
         assets=String[],
     ),
-    pages=["Home" => "index.md"],
+    pages=["Home" => "index.md", "api.md"],
     #strict=true,
     checkdocs=:exports,
 )

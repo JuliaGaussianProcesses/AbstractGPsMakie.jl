@@ -20,9 +20,9 @@ version = "0.1.0"
 
 [[AbstractPlotting]]
 deps = ["Animations", "ColorBrewer", "ColorSchemes", "ColorTypes", "Colors", "Contour", "Distributions", "DocStringExtensions", "FFMPEG", "FileIO", "FixedPointNumbers", "Formatting", "FreeType", "FreeTypeAbstraction", "GeometryBasics", "GridLayoutBase", "ImageIO", "IntervalSets", "Isoband", "KernelDensity", "LinearAlgebra", "Markdown", "Match", "Observables", "Packing", "PlotUtils", "PolygonOps", "Printf", "Random", "Serialization", "Showoff", "SignedDistanceFields", "SparseArrays", "StaticArrays", "Statistics", "StatsBase", "StructArrays", "UnicodeFun"]
-git-tree-sha1 = "4c62184a31cc4a1f8fada49706058600fb2442c9"
+git-tree-sha1 = "60183321f012000f408797b6753540cd26bf2cba"
 uuid = "537997a7-5e4e-5d89-9595-2241ea00577e"
-version = "0.16.8"
+version = "0.16.10"
 
 [[Adapt]]
 deps = ["LinearAlgebra"]
