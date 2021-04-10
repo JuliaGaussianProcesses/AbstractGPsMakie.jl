@@ -24,19 +24,31 @@ We load a custom set of colors and globally set the x-axis limits.
 ```@example quickstart
 using CairoMakie.AbstractPlotting.ColorSchemes: Set1_4
 
-set_theme!(Theme(Axis=(limits=((0, 1), nothing),)))
+set_theme!(Theme(Axis=(limits=((0, 10), nothing),)))
 ```
 
-We will perform a simple Gaussian process (GP) regression to demonstrate
-AbstractGPsMakie. We generate some random observations.
+We perform a simple Gaussian process (GP) regression with
+[AbstractGPs](https://github.com/JuliaGaussianProcesses/AbstractGPs.jl).
+We use a squared exponential kernel for our GP.
+
+```@example quickstart
+using AbstractGPs
+
+gp = GP(SqExponentialKernel())
+nothing # hide
+```
+
+We assume that data are observed under i.i.d. Gaussian noise with
+zero mean and variance 0.01. We generate some random observations.
 
 ```@example quickstart
 using Random
 
-# Random data
 Random.seed!(1234)
-x = rand(10)
-y = sinpi.(x) .+ 0.15 .* x
+
+x = 10 .* rand(10)
+gpx = gp(x, 0.01)
+y = rand(gpx)
 
 scatter(x, y; color=Set1_4[1])
 save("data.svg", current_figure()); nothing # hide
@@ -44,17 +56,10 @@ save("data.svg", current_figure()); nothing # hide
 
 ![data](data.svg)
 
-We compute the posterior of a GP model with
-[AbstractGPs](https://github.com/JuliaGaussianProcesses/AbstractGPs.jl).
-We use a squared exponential kernel and assume that the data was observed
-under i.i.d. Gaussian noise with zero mean and variance 0.01.
+We compute the posterior.
 
 ```@example quickstart
-using AbstractGPs
-
-gp = GP(SqExponentialKernel())
-
-posterior_gp = posterior(gp(x, 0.01), y)
+posterior_gp = posterior(gpx, y)
 nothing # hide
 ```
 
@@ -65,7 +70,7 @@ the plot.
 ```@example quickstart
 using AbstractGPsMakie
 
-plot(0:0.01:1, posterior_gp; bandscale=3, color=Set1_4[2], bandcolor=(Set1_4[2], 0.2))
+plot(0:0.01:10, posterior_gp; bandscale=3, color=Set1_4[2], bandcolor=(Set1_4[2], 0.2))
 scatter!(x, y; color=Set1_4[1])
 save("posterior.svg", current_figure()); nothing # hide
 ```
@@ -75,8 +80,8 @@ save("posterior.svg", current_figure()); nothing # hide
 We add 10 samples from the posterior on top.
 
 ```@example quickstart
-plot(0:0.01:1, posterior_gp; bandscale=3, color=Set1_4[2], bandcolor=(Set1_4[2], 0.2))
-gpsample!(0:0.01:1, posterior_gp; samples=10, color=Set1_4[3])
+plot(0:0.01:10, posterior_gp; bandscale=3, color=Set1_4[2], bandcolor=(Set1_4[2], 0.2))
+gpsample!(0:0.01:10, posterior_gp; samples=10, color=Set1_4[3])
 scatter!(x, y; color=Set1_4[1])
 save("posterior_samples.svg", current_figure()); nothing # hide
 ```
@@ -87,10 +92,10 @@ We can visualize a manifold of similar samples by animating the generated sample
 
 ```@example quickstart
 scene = plot(
-    0:0.01:1, posterior_gp;
+    0:0.01:10, posterior_gp;
     bandscale=3, color=Set1_4[2], bandcolor=(Set1_4[2], 0.2),
 )
-samples = gpsample!(0:0.01:1, posterior_gp; samples=10, color=Set1_4[3])
+samples = gpsample!(0:0.01:10, posterior_gp; samples=10, color=Set1_4[3])
 scatter!(x, y; color=Set1_4[1])
 
 record(scene, "posterior_animation.mp4", 0:0.01:4) do x
