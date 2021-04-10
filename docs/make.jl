@@ -27,5 +27,7 @@ makedocs(;
 )
 
 deploydocs(;
-    repo="github.com/JuliaGaussianProcesses/AbstractGPsMakie.jl", push_preview=true, devbranch="main"
+    repo="github.com/JuliaGaussianProcesses/AbstractGPsMakie.jl",
+    push_preview=true,
+    devbranch="main",
 )
