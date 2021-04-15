@@ -9,6 +9,4 @@
 [![Coverage](https://coveralls.io/repos/github/JuliaGaussianProcesses/AbstractGPsMakie.jl/badge.svg?branch=main)](https://coveralls.io/github/JuliaGaussianProcesses/AbstractGPsMakie.jl?branch=main)
 [![Code Style: Blue](https://img.shields.io/badge/code%20style-blue-4495d1.svg)](https://github.com/invenia/BlueStyle)
 
-
 [![samples from a GP](https://juliagaussianprocesses.github.io/AbstractGPsMakie.jl/dev/posterior_samples.svg)](https://juliagaussianprocesses.github.io/AbstractGPsMakie.jl/dev)
-
