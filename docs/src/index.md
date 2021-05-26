@@ -22,7 +22,7 @@ using CairoMakie
 We load a custom set of colors and globally set the x-axis limits.
 
 ```@example quickstart
-using CairoMakie.AbstractPlotting.ColorSchemes: Set1_4
+using CairoMakie.Makie.ColorSchemes: Set1_4
 
 set_theme!(Theme(Axis=(limits=((0, 10), nothing),)))
 ```

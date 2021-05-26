@@ -1,5 +1,5 @@
 # `SymBand` for `FiniteGP`
-function AbstractPlotting.convert_arguments(
+function Makie.convert_arguments(
     ::Type{P}, x::AbstractVector, gp::FiniteGP
 ) where {P<:SymBand}
     y, var = mean_and_var(gp)
@@ -8,36 +8,29 @@ function AbstractPlotting.convert_arguments(
 end
 
 # `GPSample` for `FiniteGP`
-function AbstractPlotting.convert_arguments(
-    ::Type{<:GPSample}, x::AbstractVector, gp::FiniteGP
-)
-    return (x, gp)
-end
+Makie.convert_arguments(::Type{<:GPSample}, x::AbstractVector, gp::FiniteGP) = (x, gp)
 
 # Default fallback: plot mean of GP
-function AbstractPlotting.convert_arguments(
-    P::AbstractPlotting.PlotFunc, x::AbstractVector, gp::FiniteGP
-)
+function Makie.convert_arguments(P::Makie.PlotFunc, x::AbstractVector, gp::FiniteGP)
     return convert_arguments(P, x, mean(gp))
 end
 
-# Fallback for `band`/`band!`: plot band of 3 SD around mean of GP
-# attributes not available, therefore no scaling possible :(
-# https://github.com/JuliaPlots/Makie.jl/issues/837
-function AbstractPlotting.convert_arguments(
-    ::Type{P}, x::AbstractVector, gp::FiniteGP
-) where {P<:Band}
+# `Band` with scaling for `FiniteGP`
+Makie.used_attributes(::Type{<:Band}, ::AbstractVector, ::FiniteGP) = (:bandscale,)
+function Makie.convert_arguments(
+    ::Type{<:Band}, x::AbstractVector, gp::FiniteGP; bandscale=1
+)
     y, var = mean_and_var(gp)
-    scale = 3
-    return (Point2f0.(x, y .- scale .* sqrt.(var)), Point2f0.(x, y .+ scale .* sqrt.(var)))
+    Δy = bandscale .* sqrt.(var)
+    return (Point2f0.(x, y .- Δy), Point2f0.(x, y .+ Δy))
 end
 
 # default conversions for `FiniteGP` and `AbstractGP`
-function AbstractPlotting.convert_arguments(
-    P::AbstractPlotting.PlotFunc, x::AbstractVector, gp::AbstractGPs.AbstractGP
+function Makie.convert_arguments(
+    P::Makie.PlotFunc, x::AbstractVector, gp::AbstractGPs.AbstractGP
 )
     return convert_arguments(P, gp(x, 1e-9))
 end
-function AbstractPlotting.convert_arguments(P::AbstractPlotting.PlotFunc, gp::FiniteGP)
+function Makie.convert_arguments(P::Makie.PlotFunc, gp::FiniteGP)
     return convert_arguments(P, gp.x, gp)
 end

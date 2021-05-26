@@ -11,7 +11,7 @@ correspond to angles in ``[0, 2\\pi)`` on the great circle of samples.
 
 ## Attributes
 
-$(AbstractPlotting.ATTRIBUTES)
+$(Makie.ATTRIBUTES)
 
 [^PH2013]: Philipp Hennig (2013). [Animating Samples from Gaussian Distributions](http://mlss.tuebingen.mpg.de/2013/2013/Hennig_2013_Animating_Samples_from_Gaussian_Distributions.pdf). Technical Report No. 8 of the Max Planck Institute for Intelligent Systems.
 """
@@ -35,7 +35,7 @@ Plot sample(s) from the finite projection `gp(x, 1e-9)` along `x`.
 """
 gpsample(::AbstractVector, ::AbstractGP; kwargs...)
 
-function AbstractPlotting.plot!(plot::GPSample)
+function Makie.plot!(plot::GPSample)
     @extract plot (x, gp)
 
     # Compute mean of the GP and the Cholesky decomposition of its covariance matrix

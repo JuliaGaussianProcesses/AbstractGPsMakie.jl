@@ -17,9 +17,14 @@
     end
 
     # Fallback for `Band`
-    lower = mu .- 3 .* sqrt.(var)
-    upper = mu .+ 3 .* sqrt.(var)
+    lower = mu .- sqrt.(var)
+    upper = mu .+ sqrt.(var)
     @test convert_arguments(Band, z, f) ==
+          (map(Point2f0, z, lower), map(Point2f0, z, upper))
+    scale = rand()
+    lower = mu .- scale .* sqrt.(var)
+    upper = mu .+ scale .* sqrt.(var)
+    @test convert_arguments(Band, z, f; bandscale=scale) ==
           (map(Point2f0, z, lower), map(Point2f0, z, upper))
 
     # Fallback for `AbstractGP` and `FiniteGP`

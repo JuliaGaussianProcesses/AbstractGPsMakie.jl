@@ -6,7 +6,7 @@ Plot a symmetric band of radius `bandscale * Δy` around `(x, y)`.
 
 ## Attributes
 
-$(AbstractPlotting.ATTRIBUTES)
+$(Makie.ATTRIBUTES)
 """
 @recipe(SymBand, xy, Δy) do scene
     b_theme = default_theme(scene, Band)
@@ -24,7 +24,7 @@ $(AbstractPlotting.ATTRIBUTES)
     )
 end
 
-function AbstractPlotting.plot!(plot::SymBand)
+function Makie.plot!(plot::SymBand)
     @extract plot (xy, Δy)
     lower_upper = lift(xy, Δy, plot.bandscale) do xy, Δy, scale
         return (
@@ -56,4 +56,4 @@ function AbstractPlotting.plot!(plot::SymBand)
     return plot
 end
 
-AbstractPlotting.convert_arguments(::Type{<:SymBand}, x, y, Δy) = (map(Point2f0, x, y), Δy)
+Makie.convert_arguments(::Type{<:SymBand}, x, y, Δy) = (map(Point2f0, x, y), Δy)
