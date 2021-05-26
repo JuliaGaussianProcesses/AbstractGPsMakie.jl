@@ -17,7 +17,7 @@ Random.seed!(1) # hide
 x = 1:10
 y = rand(10)
 Δy = rand(10)
-symband(x, y, Δy; color=:blue, bandcolor=(:blue, 0.3), bandscale=2.5)
+symband(x, y, Δy; color=(:blue, 0.3), bandscale=2.5)
 save("symband_example.svg", current_figure()); nothing # hide
 ```
 

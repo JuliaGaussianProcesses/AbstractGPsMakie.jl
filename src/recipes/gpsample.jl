@@ -16,15 +16,16 @@ $(Makie.ATTRIBUTES)
 [^PH2013]: Philipp Hennig (2013). [Animating Samples from Gaussian Distributions](http://mlss.tuebingen.mpg.de/2013/2013/Hennig_2013_Animating_Samples_from_Gaussian_Distributions.pdf). Technical Report No. 8 of the Max Planck Institute for Intelligent Systems.
 """
 @recipe(GPSample, x, gp) do scene
-    l_theme = default_theme(scene, Lines)
     Attributes(;
-        color=l_theme.color,
-        colormap=l_theme.colormap,
-        colorrange=get(l_theme.attributes, :colorrange, AbstractPlotting.automatic),
-        linestyle=l_theme.linestyle,
-        linewidth=l_theme.linewidth,
+        color=theme(scene, :linecolor),
+        colormap=theme(scene, :colormap),
+        colorrange=Makie.automatic,
+        linestyle=theme(scene, :linestyle),
+        linewidth=theme(scene, :linewidth),
         samples=Node(1),
         orbit=Node(0.0),
+        cycle=[:color],
+        inspectable=theme(scene, :inspectable),
     )
 end
 
@@ -102,6 +103,7 @@ function Makie.plot!(plot::GPSample)
         linewidth=plot.linewidth,
         colormap=plot.colormap,
         colorrange=plot.colorrange,
+        inspectable=plot.inspectable,
     )
 
     return plot
