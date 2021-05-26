@@ -22,9 +22,13 @@ using CairoMakie
 We load a custom set of colors and globally set the x-axis limits.
 
 ```@example quickstart
-using CairoMakie.AbstractPlotting.ColorSchemes: Set1_4
+using CairoMakie.Makie.ColorSchemes: Set1_4
 
-set_theme!(Theme(Axis=(limits=((0, 10), nothing),)))
+set_theme!(
+    palette=(color=Set1_4,),
+    patchcolor=(Set1_4[2], 0.2),
+    Axis=(limits=((0, 10), nothing),),
+)
 ```
 
 We perform a simple Gaussian process (GP) regression with
@@ -50,7 +54,7 @@ x = 10 .* rand(10)
 gpx = gp(x, 0.01)
 y = rand(gpx)
 
-scatter(x, y; color=Set1_4[1])
+scatter(x, y)
 save("data.svg", current_figure()); nothing # hide
 ```
 
@@ -70,8 +74,8 @@ the plot.
 ```@example quickstart
 using AbstractGPsMakie
 
-plot(0:0.01:10, posterior_gp; bandscale=3, color=Set1_4[2], bandcolor=(Set1_4[2], 0.2))
-scatter!(x, y; color=Set1_4[1])
+plot(0:0.01:10, posterior_gp; bandscale=3)
+scatter!(x, y)
 save("posterior.svg", current_figure()); nothing # hide
 ```
 
@@ -80,9 +84,9 @@ save("posterior.svg", current_figure()); nothing # hide
 We add 10 samples from the posterior on top.
 
 ```@example quickstart
-plot(0:0.01:10, posterior_gp; bandscale=3, color=Set1_4[2], bandcolor=(Set1_4[2], 0.2))
+plot(0:0.01:10, posterior_gp; bandscale=3)
 gpsample!(0:0.01:10, posterior_gp; samples=10, color=Set1_4[3])
-scatter!(x, y; color=Set1_4[1])
+scatter!(x, y)
 save("posterior_samples.svg", current_figure()); nothing # hide
 ```
 
@@ -91,12 +95,9 @@ save("posterior_samples.svg", current_figure()); nothing # hide
 We can visualize a manifold of similar samples by animating the generated samples.[^PH2013]
 
 ```@example quickstart
-scene = plot(
-    0:0.01:10, posterior_gp;
-    bandscale=3, color=Set1_4[2], bandcolor=(Set1_4[2], 0.2),
-)
+scene = plot(0:0.01:10, posterior_gp; bandscale=3)
 samples = gpsample!(0:0.01:10, posterior_gp; samples=10, color=Set1_4[3])
-scatter!(x, y; color=Set1_4[1])
+scatter!(x, y)
 
 record(scene, "posterior_animation.mp4", 0:0.01:4) do x
     samples.orbit[] = x

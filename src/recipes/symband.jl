@@ -6,25 +6,23 @@ Plot a symmetric band of radius `bandscale * Δy` around `(x, y)`.
 
 ## Attributes
 
-$(AbstractPlotting.ATTRIBUTES)
+$(Makie.ATTRIBUTES)
 """
 @recipe(SymBand, xy, Δy) do scene
-    b_theme = default_theme(scene, Band)
-    l_theme = default_theme(scene, Lines)
     Attributes(;
-        color=l_theme.color,
-        colormap=l_theme.colormap,
-        colorrange=get(l_theme.attributes, :colorrange, AbstractPlotting.automatic),
-        linestyle=l_theme.linestyle,
-        linewidth=l_theme.linewidth,
-        bandcolor=b_theme.color,
-        bandcolormap=b_theme.colormap,
-        bandcolorrange=b_theme.colorrange,
         bandscale=Node(1.0),
+        color=theme(scene, :patchcolor),
+        colormap=theme(scene, :colormap),
+        colorrange=Makie.automatic,
+        linecolor=Makie.automatic,
+        linestyle=theme(scene, :linestyle),
+        linewidth=theme(scene, :linewidth),
+        cycle=[:color => :patchcolor],
+        inspectable=theme(scene, :inspectable),
     )
 end
 
-function AbstractPlotting.plot!(plot::SymBand)
+function Makie.plot!(plot::SymBand)
     @extract plot (xy, Δy)
     lower_upper = lift(xy, Δy, plot.bandscale) do xy, Δy, scale
         return (
@@ -35,18 +33,24 @@ function AbstractPlotting.plot!(plot::SymBand)
     lower = lift(first, lower_upper)
     upper = lift(last, lower_upper)
 
+    linecolor = lift(plot.color, plot.linecolor) do color, linecolor
+        linecolor === Makie.automatic || return linecolor
+        c = to_color(color)
+        return Makie.RGB(Makie.red(c), Makie.green(c), Makie.blue(c))
+    end
+
     band!(
         plot,
         lower,
         upper;
-        color=plot.bandcolor,
-        colormap=plot.bandcolormap,
-        colorrange=plot.bandcolorrange,
+        color=plot.color,
+        colormap=plot.colormap,
+        colorrange=plot.colorrange,
     )
     lines!(
         plot,
         xy;
-        color=plot.color,
+        color=linecolor,
         linestyle=plot.linestyle,
         linewidth=plot.linewidth,
         colormap=plot.colormap,
@@ -56,4 +60,4 @@ function AbstractPlotting.plot!(plot::SymBand)
     return plot
 end
 
-AbstractPlotting.convert_arguments(::Type{<:SymBand}, x, y, Δy) = (map(Point2f0, x, y), Δy)
+Makie.convert_arguments(::Type{<:SymBand}, x, y, Δy) = (map(Point2f0, x, y), Δy)

@@ -1,6 +1,6 @@
 using AbstractGPsMakie
 using AbstractGPs
-using AbstractPlotting
+using Makie
 using Random
 using Test
 
