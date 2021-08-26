@@ -19,8 +19,8 @@
     # Fallback for `Band`
     lower = mu .- sqrt.(var)
     upper = mu .+ sqrt.(var)
-    @test convert_arguments(Band, z, f) ==
-          (map(Point2f, z, lower), map(Point2f, z, upper))
+    @test convert_arguments(Band, z, f) == (map(Point2f, z, lower), map(Point2f, z, upper))
+
     scale = rand()
     lower = mu .- scale .* sqrt.(var)
     upper = mu .+ scale .* sqrt.(var)
