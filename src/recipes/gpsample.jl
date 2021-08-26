@@ -79,7 +79,7 @@ function Makie.plot!(plot::GPSample)
 
         # Compute points to plot (NaN required to separate lines)
         d, n = size(R)
-        z = fill(Point2f0(NaN32), d + 1, n)
+        z = fill(Point2f(NaN32), d + 1, n)
         zflat = reinterpret(Float32, z)
 
         # Fill x coordinates

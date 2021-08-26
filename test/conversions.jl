@@ -6,7 +6,7 @@
     z = rand(10)
 
     # `SymBand`
-    @test convert_arguments(SymBand, z, f) == (map(Point2f0, z, mu), map(sqrt, var))
+    @test convert_arguments(SymBand, z, f) == (map(Point2f, z, mu), map(sqrt, var))
 
     # `GPSample`
     @test convert_arguments(GPSample, z, f) == (z, f)
@@ -20,12 +20,12 @@
     lower = mu .- sqrt.(var)
     upper = mu .+ sqrt.(var)
     @test convert_arguments(Band, z, f) ==
-          (map(Point2f0, z, lower), map(Point2f0, z, upper))
+          (map(Point2f, z, lower), map(Point2f, z, upper))
     scale = rand()
     lower = mu .- scale .* sqrt.(var)
     upper = mu .+ scale .* sqrt.(var)
     @test convert_arguments(Band, z, f; bandscale=scale) ==
-          (map(Point2f0, z, lower), map(Point2f0, z, upper))
+          (map(Point2f, z, lower), map(Point2f, z, upper))
 
     # Fallback for `AbstractGP` and `FiniteGP`
     for P in (Lines, LineSegments, Scatter, Band, SymBand, GPSample)
