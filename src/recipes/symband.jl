@@ -26,8 +26,8 @@ function Makie.plot!(plot::SymBand)
     @extract plot (xy, Δy)
     lower_upper = lift(xy, Δy, plot.bandscale) do xy, Δy, scale
         return (
-            Point2f0.(first.(xy), last.(xy) .- abs.(scale .* Δy)),
-            Point2f0.(first.(xy), last.(xy) .+ abs.(scale .* Δy)),
+            Point2f.(first.(xy), last.(xy) .- abs.(scale .* Δy)),
+            Point2f.(first.(xy), last.(xy) .+ abs.(scale .* Δy)),
         )
     end
     lower = lift(first, lower_upper)
@@ -60,4 +60,4 @@ function Makie.plot!(plot::SymBand)
     return plot
 end
 
-Makie.convert_arguments(::Type{<:SymBand}, x, y, Δy) = (map(Point2f0, x, y), Δy)
+Makie.convert_arguments(::Type{<:SymBand}, x, y, Δy) = (map(Point2f, x, y), Δy)

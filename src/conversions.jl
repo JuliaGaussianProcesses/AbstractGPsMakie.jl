@@ -22,7 +22,7 @@ function Makie.convert_arguments(
 )
     y, var = mean_and_var(gp)
     Δy = bandscale .* sqrt.(var)
-    return (Point2f0.(x, y .- Δy), Point2f0.(x, y .+ Δy))
+    return (Point2f.(x, y .- Δy), Point2f.(x, y .+ Δy))
 end
 
 # default conversions for `FiniteGP` and `AbstractGP`
