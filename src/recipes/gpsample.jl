@@ -22,8 +22,8 @@ $(Makie.ATTRIBUTES)
         colorrange=Makie.automatic,
         linestyle=theme(scene, :linestyle),
         linewidth=theme(scene, :linewidth),
-        samples=Node(1),
-        orbit=Node(0.0),
+        samples=Observable(1),
+        orbit=Observable(0.0),
         cycle=[:color],
         inspectable=theme(scene, :inspectable),
     )

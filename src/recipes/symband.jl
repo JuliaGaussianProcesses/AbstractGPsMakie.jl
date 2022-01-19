@@ -10,7 +10,7 @@ $(Makie.ATTRIBUTES)
 """
 @recipe(SymBand, xy, Δy) do scene
     Attributes(;
-        bandscale=Node(1.0),
+        bandscale=Observable(1.0),
         color=theme(scene, :patchcolor),
         colormap=theme(scene, :colormap),
         colorrange=Makie.automatic,
