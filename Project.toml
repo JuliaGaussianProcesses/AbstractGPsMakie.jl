@@ -1,7 +1,7 @@
 name = "AbstractGPsMakie"
 uuid = "7834405d-1089-4985-bd30-732a30b92057"
 authors = ["David Widmann"]
-version = "0.2.3"
+version = "0.2.4"
 
 [deps]
 AbstractGPs = "99985d1d-32ba-4be9-9821-2ec096f28918"
