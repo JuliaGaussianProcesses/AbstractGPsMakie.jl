@@ -1,7 +1,7 @@
 name = "AbstractGPsMakie"
 uuid = "7834405d-1089-4985-bd30-732a30b92057"
 authors = ["David Widmann"]
-version = "0.2.5"
+version = "0.2.6"
 
 [deps]
 AbstractGPs = "99985d1d-32ba-4be9-9821-2ec096f28918"
@@ -10,5 +10,5 @@ Makie = "ee78f7c6-11fb-53f2-987a-cfe4a2b5a57a"
 
 [compat]
 AbstractGPs = "0.3, 0.4, 0.5"
-Makie = "0.15.2, 0.16, 0.17, 0.18"
+Makie = "0.15.2, 0.16, 0.17, 0.18, 0.19"
 julia = "1.3"
