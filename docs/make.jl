@@ -22,7 +22,6 @@ makedocs(;
         assets=String[],
     ),
     pages=["Home" => "index.md", "api.md"],
-    #strict=true,
     checkdocs=:exports,
 )
 
