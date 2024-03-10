@@ -8,21 +8,22 @@ end
 using AbstractGPsMakie
 
 DocMeta.setdocmeta!(
-    AbstractGPsMakie, :DocTestSetup, :(using AbstractGPsMakie); recursive=true
+    AbstractGPsMakie,
+    :DocTestSetup,
+    :(using AbstractGPsMakie);
+    recursive=true
 )
 
 makedocs(;
-    modules=[AbstractGPsMakie],
-    authors="David Widmann",
-    repo="https://github.com/JuliaGaussianProcesses/AbstractGPsMakie.jl/blob/{commit}{path}#{line}",
     sitename="AbstractGPsMakie.jl",
+    authors="David Widmann",
     format=Documenter.HTML(;
         prettyurls=get(ENV, "CI", "false") == "true",
-        canonical="https://juliagaussianprocesses.github.io/AbstractGPsMakie.jl",
         assets=String[],
     ),
+    modules=[AbstractGPsMakie],
     pages=["Home" => "index.md", "api.md"],
-    #strict=true,
+    warnonly=true,
     checkdocs=:exports,
 )
 
