@@ -4,7 +4,6 @@
 
 ```@docs
 symband
-symband!
 ```
 
 ### Example
@@ -28,7 +27,6 @@ save("symband_example.svg", current_figure()); nothing # hide
 
 ```@docs
 gpsample
-gpsample!
 gpsample(::AbstractVector, ::AbstractGPsMakie.AbstractGP)
 ```
 
