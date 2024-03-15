@@ -25,8 +25,7 @@ We load a custom set of colors and globally set the x-axis limits.
 using CairoMakie.Makie.ColorSchemes: Set1_4
 
 set_theme!(
-    palette=(color=Set1_4,),
-    patchcolor=(Set1_4[2], 0.2),
+    palette=(color=Set1_4, patchcolor=tuple.(Set1_4, 0.2)),
     Axis=(limits=((0, 10), nothing),),
 )
 ```
@@ -74,7 +73,7 @@ the plot.
 ```@example quickstart
 using AbstractGPsMakie
 
-plot(0:0.01:10, posterior_gp; bandscale=3)
+plot(0:0.01:10, posterior_gp; bandscale=3, color=Cycled(2))
 scatter!(x, y)
 save("posterior.svg", current_figure()); nothing # hide
 ```
@@ -84,8 +83,8 @@ save("posterior.svg", current_figure()); nothing # hide
 We add 10 samples from the posterior on top.
 
 ```@example quickstart
-plot(0:0.01:10, posterior_gp; bandscale=3)
-gpsample!(0:0.01:10, posterior_gp; samples=10, color=Set1_4[3])
+plot(0:0.01:10, posterior_gp; bandscale=3, color=Cycled(2))
+gpsample!(0:0.01:10, posterior_gp; samples=10, color=Cycled(3))
 scatter!(x, y)
 save("posterior_samples.svg", current_figure()); nothing # hide
 ```
@@ -95,8 +94,8 @@ save("posterior_samples.svg", current_figure()); nothing # hide
 We can visualize a manifold of similar samples by animating the generated samples.[^PH2013]
 
 ```@example quickstart
-scene = plot(0:0.01:10, posterior_gp; bandscale=3)
-samples = gpsample!(0:0.01:10, posterior_gp; samples=10, color=Set1_4[3])
+scene = plot(0:0.01:10, posterior_gp; bandscale=3, color=Cycled(2))
+samples = gpsample!(0:0.01:10, posterior_gp; samples=10, color=Cycled(3))
 scatter!(x, y)
 
 record(scene, "posterior_animation.mp4", 0:0.01:4) do x
