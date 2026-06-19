@@ -36,7 +36,9 @@ function Makie.plot!(plot::SymBand)
     linecolor = lift(plot.color, plot.linecolor) do color, linecolor
         linecolor === Makie.automatic || return linecolor
         c = to_color(color)
-        return Makie.RGB(Makie.red(c), Makie.green(c), Makie.blue(c))
+        a = Makie.alpha(c)
+        rgb = Makie.RGB(Makie.red(c), Makie.green(c), Makie.blue(c))
+        return a < 1 ? Makie.RGBA(rgb, a) : rgb
     end
 
     band!(
